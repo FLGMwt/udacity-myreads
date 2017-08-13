@@ -1,10 +1,15 @@
 import React from 'react';
 import Book from './Book';
+import _ from 'lodash';
 
-const BookGrid = ({books}) => (
-  <ol className="books-grid">
+const BookGrid = ({books, onBookShelfChange}) => (
+  <ol className='books-grid'>
     {books.map(book =>
-      <Book key={book.title} book={book} />
+      <Book
+        key={book.title}
+        book={book}
+        onShelfChange={_.partial(onBookShelfChange, book)}
+        />
     )}
   </ol>
 );

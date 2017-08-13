@@ -2,7 +2,7 @@ import React from 'react';
 import BookGrid from './BookGrid';
 import { Link } from 'react-router-dom';
 
-const SearchPage = ({books, onSearchInputChange}) => (
+const SearchPage = ({books, onSearchInputChange, onBookShelfChange}) => (
   <div className='search-books'>
     <div className='search-books-bar'>
     <Link to='/' className='close-search'>Close</Link>
@@ -11,7 +11,7 @@ const SearchPage = ({books, onSearchInputChange}) => (
       </div>
     </div>
     <div className='search-books-results'>
-      <BookGrid books={books} />
+      <BookGrid books={books} onBookShelfChange={onBookShelfChange} />
     </div>
   </div>
 );
