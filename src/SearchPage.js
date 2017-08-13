@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import BookGrid from './BookGrid';
 
 export default class SearchPage extends Component {
   render() {
+    const { books } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -20,7 +22,7 @@ export default class SearchPage extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <BookGrid books={books} />
         </div>
       </div>
     );
