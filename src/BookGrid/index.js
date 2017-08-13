@@ -1,12 +1,11 @@
 import React from 'react';
 import Book from './Book';
 
-const BookGrid = ({books, statusFilter}) => (
+const BookGrid = ({books}) => (
   <ol className="books-grid">
-    {books
-      .filter(book => statusFilter === undefined || book.status === statusFilter)
-      .map(book => <Book key={book.title} book={book} />)
-    }
+    {books.map(book =>
+      <Book key={book.title} book={book} />
+    )}
   </ol>
 );
 

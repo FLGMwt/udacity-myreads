@@ -14,12 +14,16 @@ class BooksApp extends Component {
   render() {
     const { books } = this.state;
     return (
-      <div className="app">
-        <Route exact path='/' render={() => <BookList books={books} />} />
-        <Route path='/search' render={() => <SearchPage books={books} />} />
+      <div className='app'>
+        <Route exact path='/' render={() =>
+          <BookList books={books} />
+        } />
+        <Route path='/search' render={() =>
+          <SearchPage books={books} onSearchInputChange={() => {}} />
+        } />
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;
