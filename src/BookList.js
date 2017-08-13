@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import books from './StubData';
 
 const Book = ({book}) => (
   <li>
@@ -33,6 +32,7 @@ const BookSection = ({books, status}) => (
 
 export default class BookList extends Component {
   render() {
+    const { books } = this.props;
     return (
     <div className="list-books">
       <div className="list-books-title">
