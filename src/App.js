@@ -4,15 +4,23 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import BookList from './BookList';
 import SearchPage from './SearchPage';
-import initialBooks from './StubData';
 
 class BooksApp extends Component {
   state = {
-    books: initialBooks,
+    books: null,
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then(books => {
+      this.setState({
+        books,
+      })
+    });
   }
 
   render() {
     const { books } = this.state;
+    if (!books) return null;
     return (
       <div className='app'>
         <Route exact path='/' render={() =>

@@ -3,7 +3,7 @@ import BookGrid from './BookGrid';
 import { Link } from 'react-router-dom';
 
 const FilteredBookGrid = ({books, statusFilter}) => {
-  const filteredBooks = books.filter(book => book.status === statusFilter);
+  const filteredBooks = books.filter(book => book.shelf === statusFilter);
   return <BookGrid books={filteredBooks} />;
 }
 
