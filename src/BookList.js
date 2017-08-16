@@ -1,15 +1,40 @@
 import React, { Component } from 'react';
 import BookGrid from './BookGrid';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
 
-const FilteredBookGrid = ({books, statusFilter, onBookShelfChange}) => {
-  const filteredBooks = books.filter(book => book.shelf === statusFilter);
+export const FilteredBookGrid = ({books, shelfFilter, onBookShelfChange}) => {
+  const filteredBooks = books.filter(book => book.shelf === shelfFilter);
   return <BookGrid books={filteredBooks} onBookShelfChange={onBookShelfChange} />;
 }
 
 export default class BookList extends Component {
+
+  state = {
+    books: [],
+  }
+
+  componentDidMount() {
+    this.getAllBooks();
+  }
+
+  handleBookShelfChange = (book, shelfUpdateEvent) => {
+    const shelf = shelfUpdateEvent.target.value;
+    if (book.shelf === shelf) return;
+
+    BooksAPI
+      .update({id: book.id}, shelf)
+      .then(this.getAllBooks);
+  }
+
+  getAllBooks = () => {
+    BooksAPI
+      .getAll()
+      .then(books => this.setState({books}));
+  }
+
   render() {
-    const { books, onBookShelfChange } = this.props;
+    const {books} = this.state;
     return (
     <div className='list-books'>
       <div className='list-books-title'>
@@ -21,9 +46,9 @@ export default class BookList extends Component {
             <h2 className='bookshelf-title'>Currently Reading</h2>
             <div className='bookshelf-books'>
               <FilteredBookGrid
-                statusFilter='currentlyReading'
+                shelfFilter='currentlyReading'
                 books={books}
-                onBookShelfChange={onBookShelfChange}
+                onBookShelfChange={this.handleBookShelfChange}
                 />
             </div>
           </div>
@@ -31,9 +56,9 @@ export default class BookList extends Component {
             <h2 className='bookshelf-title'>Want to Read</h2>
             <div className='bookshelf-books'>
               <FilteredBookGrid
-                statusFilter='wantToRead'
+                shelfFilter='wantToRead'
                 books={books}
-                onBookShelfChange={onBookShelfChange}
+                onBookShelfChange={this.handleBookShelfChange}
                 />
             </div>
           </div>
@@ -41,9 +66,9 @@ export default class BookList extends Component {
             <h2 className='bookshelf-title'>Read</h2>
             <div className='bookshelf-books'>
               <FilteredBookGrid
-                statusFilter='read'
+                shelfFilter='read'
                 books={books}
-                onBookShelfChange={onBookShelfChange}
+                onBookShelfChange={this.handleBookShelfChange}
                 />
             </div>
           </div>

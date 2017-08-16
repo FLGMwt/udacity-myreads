@@ -1,3 +1,4 @@
+import _ from 'lodash';
 const api = 'https://reactnd-books-api.udacity.com'
 
 
@@ -11,33 +12,53 @@ const headers = {
   'Authorization': token
 }
 
-export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
-    .then(res => res.json())
-    .then(data => data.book)
+// export const get = (bookId) =>
+//   fetch(`${api}/books/${bookId}`, { headers })
+//     .then(res => res.json())
+//     .then(data => data.book)
 
-export const getAll = () =>
-  fetch(`${api}/books`, { headers })
-    .then(res => res.json())
-    .then(data => data.books)
+// export const getAll = () =>
+//   fetch(`${api}/books`, { headers })
+//     .then(res => res.json())
+//     .then(data => data.books)
 
-export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
-    method: 'PUT',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ shelf })
-  }).then(res => res.json())
+// export const update = (book, shelf) =>
+//   fetch(`${api}/books/${book.id}`, {
+//     method: 'PUT',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ shelf })
+//   }).then(res => res.json())
 
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query, maxResults })
-  }).then(res => res.json())
-    .then(data => data.books)
+// export const search = (query, maxResults) =>
+//   fetch(`${api}/search`, {
+//     method: 'POST',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ query, maxResults })
+//   }).then(res => res.json())
+//     .then(data => data.books)
+
+const books = [
+  {id: 1, title: 't1', authors: 'a1', shelf: 'currentlyReading', imageLinks: {}},
+  {id: 2, title: 't2', authors: 'a2', shelf: 'currentlyReading', imageLinks: {}},
+  {id: 3, title: 't3', authors: 'a3', shelf: 'currentlyReading', imageLinks: {}},
+];
+
+export const getAll = () => Promise.resolve(books);
+
+export const update = (book, shelf) => {
+  const thisBook = _.find(books, {id: book.id});
+  thisBook.shelf = shelf;
+  return Promise.resolve(thisBook);
+}
+
+
+export const search = searchText => {
+  const results = books.filter(book => book.title.includes(searchText));
+  return Promise.resolve({items:results});
+};

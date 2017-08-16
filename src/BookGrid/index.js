@@ -6,7 +6,7 @@ const BookGrid = ({books, onBookShelfChange}) => (
   <ol className='books-grid'>
     {books.map(book =>
       <Book
-        key={book.title}
+        key={book.id}
         book={book}
         onShelfChange={_.partial(onBookShelfChange, book)}
         />
