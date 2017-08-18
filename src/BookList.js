@@ -6,7 +6,7 @@ import * as BooksAPI from './BooksAPI';
 export const FilteredBookGrid = ({books, shelfFilter, onBookShelfChange}) => {
   const filteredBooks = books.filter(book => book.shelf === shelfFilter);
   return <BookGrid books={filteredBooks} onBookShelfChange={onBookShelfChange} />;
-}
+};
 
 export default class BookList extends Component {
 
