@@ -5,7 +5,7 @@ import { spy } from 'sinon';
 
 import ShelfChanger from '../ShelfChanger';
 
-describe.only('ShelfChanger', () => {
+describe('ShelfChanger', () => {
   it('should render a select with the provided shelf and change handler', () => {
     const props = {
       shelf: 'wantToRead',
@@ -15,7 +15,7 @@ describe.only('ShelfChanger', () => {
     const sut = shallow(<ShelfChanger {...props} />);
 
     const select = sut.find('select');
-    expect(select).to.have.prop('shelf', 'wantToRead');
-    expect(select).to.have.prop('onShelfChange', props.onShelfChange);
+    expect(select).to.have.prop('value', 'wantToRead');
+    expect(select).to.have.prop('onChange', props.onShelfChange);
   });
 });
