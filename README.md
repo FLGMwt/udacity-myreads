@@ -1,6 +1,6 @@
 # MyReads
 
-An application for tracking books in read or currently reading.
+An application for tracking books read or currently reading.
 
 ## Setup
 
