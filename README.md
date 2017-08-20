@@ -8,4 +8,4 @@ To install, navigate to the MyReads project root and run `npm install` or `yarn`
 
 To launch the application, run either `npm start` or `yarn start`.
 
-To run tests, run either `npm run test` or `yarn run test`
+To run tests, run either `npm test` or `yarn test`

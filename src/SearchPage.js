@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import BookGrid from './BookGrid';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
@@ -12,10 +13,14 @@ class SearchPage extends Component {
 
   handleSearchInputChange = (inputChangeEvent) => {
     const searchText = inputChangeEvent.target.value;
-    this.setState({
-      searchText,
-    });
-    this.doSearch(searchText);
+    if (!searchText) {
+      this.setState({books: []});
+    } else {
+      this.setState({
+        searchText,
+      });
+      this.doSearch(searchText);
+    }
   }
 
   handleBookShelfChange = (book, shelfUpdateEvent) => {
@@ -28,11 +33,14 @@ class SearchPage extends Component {
   }
 
   doSearch = searchText => {
-    BooksAPI.search(searchText).then(books => {
-      this.setState({
-        books: books.items ? books.items : [],
+    BooksAPI
+      .search(searchText)
+      .then(books => {
+        const newBooks = _.isArray(books) ? books : [];
+        this.setState({
+          books: newBooks,
+        });
       });
-    });
   }
 
   render() {

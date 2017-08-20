@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BookGrid from './../BookGrid';
 
 const FilteredBookGrid = ({books, shelfFilter, onBookShelfChange}) => {
